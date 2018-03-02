@@ -1,0 +1,12 @@
+.weui-search-bar {
+    background-color: #fff;
+}
+
+.weui-search-bar__cancel-btn {
+    line-height: 22pt;
+    font-size: 12pt;
+}
+
+.weui-media-box__hd_in-appmsg {
+    height: 84px;
+}

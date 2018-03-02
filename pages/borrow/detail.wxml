@@ -1,0 +1,62 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">{{detail.book.data.title}}</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">当前状态</view>
+                    <view class="weui-media-box__desc">{{detail.status}}</view>
+                    <block wx:if="{{detail.status=='等待付款'}}">
+                        <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="pay">付款</button>
+                        <view class="weui-media-box__desc">(订单会在创建10分钟后关闭)</view>
+                    </block>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">借阅位置</view>
+                    <view class="weui-media-box__desc">{{detail.location.data.location}}</view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">付款金额</view>
+                    <view class="weui-media-box__desc">¥ {{detail.location.data.money}}</view>
+                </view>
+                <block wx:if="{{detail.format.created_at}}">
+                    <view class="weui-media-box weui-media-box_text">
+                        <view class="weui-media-box__title weui-media-box__title_in-text">创建时间</view>
+                        <view class="weui-media-box__desc">{{detail.format.created_at}}</view>
+                    </view>
+                </block>
+                <block wx:if="{{detail.format.paid_at}}">
+                    <view class="weui-media-box weui-media-box_text">
+                        <view class="weui-media-box__title weui-media-box__title_in-text">付款时间</view>
+                        <view class="weui-media-box__desc">{{detail.format.paid_at}}</view>
+                    </view>
+                </block>
+                <block wx:if="{{detail.format.borrowed_at}}">
+                    <view class="weui-media-box weui-media-box_text">
+                        <view class="weui-media-box__title weui-media-box__title_in-text">借阅时间</view>
+                        <view class="weui-media-box__desc">{{detail.format.borrowed_at}}</view>
+                    </view>
+                </block>
+                <block wx:if="{{detail.format.restored_at}}">
+                    <view class="weui-media-box weui-media-box_text">
+                        <view class="weui-media-box__title weui-media-box__title_in-text">归还时间</view>
+                        <view class="weui-media-box__desc">{{detail.format.restored_at}}</view>
+                    </view>
+                </block>
+            </view>
+            <view class="weui-panel__ft">
+                <navigator url="../book/detail?id={{detail.book.data.id}}">
+                    <view class="weui-cell weui-cell_access weui-cell_link">
+                        <view class="weui-cell__bd">查看图书信息</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+                </navigator>
+                <block wx:if="{{hasQr}}">
+                    <view style="margin-left:150rpx">
+                        <canvas style="width:450rpx;height:450rpx" canvas-id="qr" />
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

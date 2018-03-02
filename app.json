@@ -1,0 +1,49 @@
+{
+    "pages": [
+        "pages/book/list",
+        "pages/category/category",
+        "pages/search/search",
+        "pages/user/user",
+        "pages/book/detail",
+        "pages/favorite/favorite",
+        "pages/borrow/list",
+        "pages/borrow/detail",
+        "pages/book/list2"
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#ffffff",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "借阅伴侣",
+        "backgroundColor": "#eeeeee",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": true
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/book/list",
+                "text": "图书首页",
+                "iconPath": "./images/home.png",
+                "selectedIconPath": "./images/home_selected.png"
+            },
+            {
+                "pagePath": "pages/category/category",
+                "text": "图书分类",
+                "iconPath": "./images/category.png",
+                "selectedIconPath": "./images/category_selected.png"
+            },
+            {
+                "pagePath": "pages/search/search",
+                "text": "搜索图书",
+                "iconPath": "./images/search.png",
+                "selectedIconPath": "./images/search_selected.png"
+            },
+            {
+                "pagePath": "pages/user/user",
+                "text": "个人中心",
+                "iconPath": "./images/user.png",
+                "selectedIconPath": "./images/user_selected.png"
+            }
+        ]
+    }
+}

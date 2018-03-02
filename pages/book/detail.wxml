@@ -1,0 +1,140 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">图书信息</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="tapImg">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="{{book_detail.img}}" />
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">书名</view>
+                    <view class="weui-media-box__desc">{{book_detail.title}}</view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">分类</view>
+                    <view class="weui-media-box__desc">{{book_detail.category.data.name}}</view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">简介</view>
+                    <view class="weui-media-box__desc"><text>{{book_intro}}</text></view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">出版社</view>
+                    <view class="weui-media-box__desc">{{book_detail.publish_house}}</view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">出版时间</view>
+                    <view class="weui-media-box__desc">{{book_detail.publish_time}}</view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">载体形式</view>
+                    <view class="weui-media-box__desc">{{book_detail.object}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">作者信息</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">作者</view>
+                    <view class="weui-media-box__desc">中文名：{{book_detail.author.data.name_cn}}</view>
+                    <view class="weui-media-box__desc">外文名：{{book_detail.author.data.name_en}}</view>
+                </view>
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">简介</view>
+                    <view class="weui-media-box__desc"><text>{{author_intro}}</text></view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">作者的其他书籍</view>
+            <view class="weui-panel__bd">
+                <block wx:for="{{book_detail.author_book.data}}" wx:key="{{item.id}}">
+                    <navigator url="../book/detail?id={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg" style="width:56px;height:92px">
+                            <image class="weui-media-box__thumb" src="{{item.img}}" />
+                        </view>
+                        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__title" style="margin-left:10px">{{item.title}}</view>
+                        </view>
+                    </navigator>
+                </block>
+            </view>
+        </view>
+        <view class="weui-panel">
+            <view class="weui-panel__hd">本馆图书位置</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view class="weui-cells weui-cells_in-small-appmsg">
+                        <block wx:if="{{book_detail.location.data.length==0}}">
+                            <view class="weui-cell weui-cell_access">
+                                <view class="weui-cell__bd weui-cell_primary">
+                                    <view>本馆暂时没有此书</view>
+                                </view>
+                            </view>
+                        </block>
+                        <block wx:for="{{book_detail.location.data}}" wx:key="{{item.id}}">
+                            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-location="{{item.id}}" bindtap="tapLocation">
+                                <view class="weui-cell__bd weui-cell_primary">
+                                    <view>
+                                        <text wx:if="{{item.status==1}}" style="color:green">可借阅</text>
+                                        <text wx:else style="color:red">已借出</text>
+                                        <text> | {{item.location}}</text>
+                                    </view>
+                                </view>
+                                <view class="weui-cell__ft">价格：¥ {{item.money}}</view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-panel">
+            <view class="weui-panel__hd">各大平台价格</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view class="weui-cells weui-cells_in-small-appmsg">
+                        <block wx:if="{{book_detail.buylinks.length==0}}">
+                            <view class="weui-cell weui-cell_access">
+                                <view class="weui-cell__bd weui-cell_primary">
+                                    <view>没有查询到此书的价格</view>
+                                </view>
+                            </view>
+                        </block>
+                        <block wx:for="{{book_detail.buylinks}}" wx:key="{{item.id}}">
+                            <view class="weui-cell weui-cell_access">
+                                <view class="weui-cell__bd weui-cell_primary">
+                                    <view>{{item.shop}}</view>
+                                </view>
+                                <view class="weui-cell__ft">价格：¥ {{item.price}}</view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-panel">
+            <view class="weui-panel__hd">其他</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view class="weui-cells weui-cells_in-small-appmsg">
+                        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <block wx:if="{{favorite}}">
+                                <view class="weui-cell__bd weui-cell_primary" bindtap="tapFavorite">已收藏</view>
+                            </block>
+                            <block wx:else>
+                                <view class="weui-cell__bd weui-cell_primary" bindtap="tapFavorite">加入收藏</view>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
